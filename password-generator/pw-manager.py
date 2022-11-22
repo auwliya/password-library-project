@@ -52,6 +52,7 @@ class LoginForm:
         def forgotpw():
             messagebox.showinfo("Forgot Password", "unfortunately, peanut butter")
 
+        #when both entries match the username and password, it opens the menu page
         def login():
             username = self.unentry.get()
             password = self.pwentry.get()
@@ -113,7 +114,7 @@ class MainMenu:
         # password
         self.password = ""
 
-        #buttons
+        #buttons and the button commands
         def logoutbuttoncommand():
             window.destroy()
             loginpage()
@@ -132,7 +133,7 @@ class MainMenu:
             else:
                 messagebox.showinfo("Password List", file_contents)
                 file1.close()
-
+        
         def addpassword():
             window.destroy()
             addpwpage()
@@ -221,6 +222,7 @@ class PWGen:
         self.T=True
 
         #generates a new password using numpy
+        #n is the number from the sliderbar, it is the length of the password
         def generatepw(self):
             empty = list("")
             small = list("abcdefghijklmnopqrstuvwxyz")#codeletter Q
@@ -232,6 +234,8 @@ class PWGen:
 
             allow_gen = True
 
+            #a is the list used for the password
+            #it adds the character lists to a if one of the toggle buttons is on
             if self.Q == True:
                 a = a + small
             if self.R == True:
@@ -240,12 +244,14 @@ class PWGen:
                 a = a + number
             if self.T == True:
                 a = a + special
+
+            #returns an error if the list is empty
+            #only generates a password if the list contains 1 set of characters
             if a == empty:
                 #print("error, select what characters you want in your password")
                 messagebox.showinfo("Error", "Error, select at least one set of characters")
                 allow_gen = False
 
-            #a is the list
             #replace = True allows characters to be used twice
             if allow_gen == True:
                 choices = np.random.choice(a, size=n, replace=True)
@@ -264,7 +270,7 @@ class PWGen:
             generatedpassword.place(x=375, y=100, height='30', anchor='center')
 
             #password strength label
-            #password guess-ability largely depends on the length of a password, because the guesser often doesn't know what characters are in use
+            #password strength is decided by the length of the password, since no one knows which characters are in use
 
             #creates a bar that increases in length and changes colour
             
@@ -335,6 +341,7 @@ class PWGen:
         #command for the copybutton
         #clears the clipboard, then adds the password
         #updates the window so that it stays on the clipboard
+        
         def copyclipboard(self):
             window.clipboard_clear()
             window.clipboard_append(self.password)
