@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import random
 import numpy as np
+from PIL import Image, ImageTk
 
 #classes contain information about all the pages
 
@@ -77,6 +78,15 @@ class LoginForm:
 
         self.quitbutton = Button(window, text='QUIT', command=window.destroy, height=1, bd=6, font=('yu gothic ui', 10, 'bold'), activeforeground='#F6F7EB', activebackground='#E94F37')
         self.quitbutton.place(x=15, y=15)
+
+        #images
+        #resizes the image using PIL
+        #a small border is left around the image, it seems like this is caused by the image itself
+        image = Image.open('security.png')
+        img = image.resize((187, 98))
+        self.my_img = ImageTk.PhotoImage(img)
+        self.security_label = Label(image=self.my_img)
+        self.security_label.place(x=75, y=320)
 
 class MainMenu:
     def __init__(self, window):
@@ -573,3 +583,7 @@ def addpwpage():
 #starts out with the login page
 if __name__ == '__main__':
     loginpage()
+
+    #yaml json sqlite
+    #encryptie
+    # try catch achtige check
